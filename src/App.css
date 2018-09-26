@@ -8,9 +8,18 @@ html {
 	box-sizing: border-box;
 }
 
+body {
+	height: 100vh;
+}
+
+#root {
+	height: 100%;
+}
+
 .App {
   text-align: center;
   font-family: 'Dosis', sans-serif;
+  height: 100%;
 }
 
 .header-bar {
@@ -22,6 +31,9 @@ html {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: absolute;
+	top: 0;
+	z-index: 1;
 }
 
 .header-bar img {
@@ -34,4 +46,9 @@ h1 {
 	margin: 0;
 	font-weight: bold;
 	font-size: 2em;
+}
+
+#map {
+	height: 100%;
+	width: 100%;
 }
