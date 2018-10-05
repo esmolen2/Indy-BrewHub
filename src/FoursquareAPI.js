@@ -10,4 +10,4 @@ const foursquareVersion = '20180926';
 export const getBreweries = () =>
 	fetch(`${api}/search?client_id=${clientID}&client_secret=${clientSecret}&v=${foursquareVersion}&ll=${searchLatLng}&intent=browse&radius=${searchRadius}&limit=${resultsLimit}&categoryId=${breweryCategory}`)
 		.then(res => res.json())
-		.then(res => console.log(res))
+		.then(res => res.response.venues)

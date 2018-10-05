@@ -5,16 +5,23 @@ import GoogleMap from './GoogleMap.js'
 import * as FoursquareAPI from './FoursquareAPI.js'
 
 class App extends Component {
+	state = {
+		breweries: []
+	}
 
 	componentDidMount() {
-		FoursquareAPI.getBreweries()
+		FoursquareAPI.getBreweries().then((breweries) => {
+				this.setState({breweries})
+		})
 	}
 
 	render() {
 		return (
 			<div className="App">
 				<HeaderBar />
-				<GoogleMap />
+				<GoogleMap
+					breweries = {this.state.breweries}
+				/>
 			</div>
 		);
 	}
