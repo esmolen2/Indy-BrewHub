@@ -6,12 +6,12 @@ import * as FoursquareAPI from './FoursquareAPI.js'
 
 class App extends Component {
 	state = {
-		breweries: []
+		allBrews: []
 	}
 
 	componentDidMount() {
-		FoursquareAPI.getBreweries().then((breweries) => {
-				this.setState({breweries})
+		FoursquareAPI.getBreweries().then((allBrews) => {
+				this.setState({allBrews})
 		})
 	}
 
@@ -20,7 +20,7 @@ class App extends Component {
 			<div className="App">
 				<HeaderBar />
 				<GoogleMap
-					breweries = {this.state.breweries}
+					breweries = {this.state.allBrews}
 				/>
 			</div>
 		);
