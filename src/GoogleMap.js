@@ -39,9 +39,14 @@ class GoogleMap extends Component {
 	}
 
 	mapMarkers() {
+		const bounds = new google.maps.LatLngBounds();
+
 		this.state.markers.forEach((marker) => {
 			marker.setMap(this.state.map)
+			bounds.extend(marker.position);
 		})
+
+		this.state.map.fitBounds(bounds);
 	}
 
 	componentWillMount() {
