@@ -49,6 +49,12 @@ class GoogleMap extends Component {
 		this.state.map.fitBounds(bounds);
 	}
 
+	openInfoWindow(marker, infoWindow) {
+		infoWindow.marker = marker;
+		infoWindow.setContent('<div>' + marker.id + '</div>');
+		infoWindow.open(this.state.map, marker);
+	}
+
 	componentWillMount() {
 		// Start Google Maps API loading since we know we'll soon need it
 		this.getGoogleMaps();
@@ -63,12 +69,21 @@ class GoogleMap extends Component {
 				center: indy
 			});
 
+			const infoWindow = new google.maps.InfoWindow();
+			const openInfoWindow = this.openInfoWindow.bind(this)
+
 			this.props.breweries.forEach((brewery) => {
 				const marker = new google.maps.Marker({
 					position: {
 						lat: brewery.location.lat,
 						lng: brewery.location.lng
-					}
+					},
+					id: brewery.id,
+					title: brewery.name
+				});
+
+				marker.addListener('click', function() {
+					openInfoWindow(marker, infoWindow);
 				});
 
 				this.state.markers.push(marker);
