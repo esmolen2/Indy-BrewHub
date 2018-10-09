@@ -4,6 +4,10 @@ import React, { Component } from 'react';
 import './App.css';
 
 class GoogleMap extends Component {
+	state = {
+		map: {},
+		markers: []
+	}
 
 	// Promise-based approach to calling Google Maps API based on StackOverflow post linked below
 	// https://stackoverflow.com/questions/48493960/using-google-map-in-react-component
@@ -34,6 +38,12 @@ class GoogleMap extends Component {
 	    return this.googleMapsPromise;
 	}
 
+	mapMarkers() {
+		this.state.markers.forEach((marker) => {
+			marker.setMap(this.state.map)
+		})
+	}
+
 	componentWillMount() {
 		// Start Google Maps API loading since we know we'll soon need it
 		this.getGoogleMaps();
@@ -47,15 +57,21 @@ class GoogleMap extends Component {
 				zoom: 14,
 				center: indy
 			});
+
 			this.props.breweries.forEach((brewery) => {
-				new google.maps.Marker({
+				const marker = new google.maps.Marker({
 					position: {
 						lat: brewery.location.lat,
 						lng: brewery.location.lng
-					},
-					map: map
-				})
+					}
+				});
+
+				this.state.markers.push(marker);
 			});
+
+			this.setState({map});
+
+			this.mapMarkers();
 		});
   	}
 
