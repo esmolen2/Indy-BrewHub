@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import HeaderBar from './HeaderBar.js'
 import GoogleMap from './GoogleMap.js'
+import ListPanel from './ListPanel.js'
 import * as FoursquareAPI from './FoursquareAPI.js'
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
 				<GoogleMap
 					breweries = {this.state.allBrews}
 				/>
+				<ListPanel />
 			</div>
 		);
 	}
