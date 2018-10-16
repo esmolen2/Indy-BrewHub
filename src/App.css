@@ -52,3 +52,64 @@ h1 {
 	height: 100%;
 	width: 100%;
 }
+
+.infowindow {
+  font-family: 'Dosis', sans-serif;
+  color: #002D62;
+  max-width: 300px;
+  overflow: hidden;
+}
+
+.infowindow h3 {
+	font-size: 1.5em;
+	margin: 10px 0px;
+	padding: 0;
+}
+
+.infowindow img {
+	max-height: 200px;
+	border-radius: 4px;
+}
+
+.infowindow h4 {
+	margin: 0;
+}
+
+.infowindow p {
+	font-size: 1.1em;
+	margin: 0;
+}
+
+.details {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.rating-number {
+	font-size: 3em !important;
+	font-weight: bold;
+}
+
+.address-website {
+	text-align: left;
+	min-width: 100px;
+	padding-left: 7px;
+	margin-left: 10px;
+	border-left: 1px solid rgba(0, 45, 98, 0.5);
+}
+
+.website {
+	margin-top: 5px;
+}
+
+.website a {
+	color: #0073EB;
+}
+
+.citation {
+	margin-top: 10px !important;
+	color: rgba(0, 45, 98, 0.6);
+}

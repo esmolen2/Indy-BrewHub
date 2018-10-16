@@ -1,7 +1,8 @@
 /*global google*/
 
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import * as FoursquareAPI from './FoursquareAPI.js'
 
 class GoogleMap extends Component {
 	state = {
@@ -50,9 +51,47 @@ class GoogleMap extends Component {
 	}
 
 	openInfoWindow(marker, infoWindow) {
-		infoWindow.marker = marker;
-		infoWindow.setContent('<div>' + marker.id + '</div>');
-		infoWindow.open(this.state.map, marker);
+		FoursquareAPI.pourBrew(marker.id).then((brew) => {
+			console.log(brew);
+			infoWindow.marker = marker;
+			infoWindow.maxWidth = 300;
+			const website = brew.url ? `<a href="${brew.url}" target="_blank">Visit Website</a>` : "";
+			infoWindow.setContent(`
+				<div class="infowindow">
+					<h3>${brew.name}</h3>
+					<img src="${brew.bestPhoto.prefix}height200${brew.bestPhoto.suffix}">
+					<div class="details">
+						<div class="rating">
+							<h4>Rating</h4>
+							<p class="rating-number" style="color: #${brew.ratingColor};">${brew.rating}</p>
+						</div>
+						<div class="address-website">
+							<div class="address">
+								<h4>Address</h4>
+								<p>${brew.location.address}</p>
+								<p>${brew.location.formattedAddress[1]}</p>
+							</div>
+							<div class="website">
+								${website}
+							</div>
+						</div>
+					</div>
+					<p class="citation">*All details and images provided by Foursquare</p>
+				</div>
+			`);
+			infoWindow.open(this.state.map, marker);
+		}).catch((res) => {
+			infoWindow.marker = marker;
+			infoWindow.setContent(`
+				<div class="infowindow">
+					<h3>${marker.title}</h3>
+					<p class="error">
+						Sorry, more details on this brewery are not currently available.
+					</p>
+				</div>
+			`);
+			infoWindow.open(this.state.map, marker);
+		})
 	}
 
 	componentWillMount() {
@@ -69,8 +108,10 @@ class GoogleMap extends Component {
 				center: indy
 			});
 
-			const infoWindow = new google.maps.InfoWindow();
-			const openInfoWindow = this.openInfoWindow.bind(this)
+			const infoWindow = new google.maps.InfoWindow({
+				maxWidth: 300
+			});
+			const openInfoWindow = this.openInfoWindow.bind(this);
 
 			this.props.breweries.forEach((brewery) => {
 				const marker = new google.maps.Marker({
