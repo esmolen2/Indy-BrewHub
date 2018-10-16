@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './App.css'
-import * as FoursquareAPI from './FoursquareAPI.js'
 
 class ListPanel extends Component {
 	togglePanelView() {
@@ -17,25 +16,13 @@ class ListPanel extends Component {
 		return (
 			<div className="list-panel">
 				<div className="full-list">
-					<p>St. Joseph Brewery & Public House</p>
-					<p>Fountain Square Brewing Company</p>
-					<p>Rock Bottom Restaurant & Brewery</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
-					<p>Test</p>
+					<ul>
+						{this.props.breweries.map((brewery) => (
+							<li key={brewery.id}>
+								{brewery.name}
+							</li>
+						))}
+					</ul>
 				</div>
 				<div className="view-more" onClick={this.togglePanelView}>
 					<p className="wording view"><br></br>List of</p>

@@ -24,7 +24,9 @@ class App extends Component {
 				<GoogleMap
 					breweries = {this.state.allBrews}
 				/>
-				<ListPanel />
+				<ListPanel
+					breweries = {this.state.allBrews}
+				/>
 			</div>
 		);
 	}
