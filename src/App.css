@@ -110,3 +110,70 @@ h1 {
 	margin-top: 10px !important;
 	color: rgba(0, 45, 98, 0.6);
 }
+
+/* List Panel */
+
+.list-panel {
+	height: calc(100% - 75px);
+	position: absolute;
+	left: -120px;
+	top: 75px;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	color: #FDBB30;
+	font-size: 1em;
+	text-align: left;
+	transition-duration: 1s;
+}
+
+.open {
+	transform: translateX(120px);
+	transition-duration: 1s;
+}
+
+.full-list {
+	height: 100%;
+	overflow: scroll;
+	background-color: #002D62;
+	padding: 20px;
+	width: 120px;
+}
+
+.full-list p {
+	margin: 0 0 10px;
+	padding: 10px 0 0;
+	border-top: 1px solid #FDBB30;
+}
+
+.view-more {
+	background-color: #002D62;
+	border-radius: 0 4px 4px 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	margin-top: 10px;
+	width: 60px;
+}
+
+.view-more:hover {
+	cursor: pointer;
+}
+
+.view-more p {
+	margin: 0 0 5px 0;
+}
+
+.view-more img {
+	width: 30px;
+}
+
+.view:before {
+	content: "View";
+}
+
+.close:before {
+	content: "Close";
+}

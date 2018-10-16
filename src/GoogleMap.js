@@ -94,6 +94,18 @@ class GoogleMap extends Component {
 		})
 	}
 
+	closeListPanel() {
+		const listPanel = document.querySelector('.list-panel');
+
+		if(window.innerWidth <= 480 && listPanel.classList.contains('open')) {
+			listPanel.classList.remove('open');
+
+			const wording = document.querySelector('.wording');
+			wording.classList.toggle('view');
+			wording.classList.toggle('close');
+		}
+	}
+
 	componentWillMount() {
 		// Start Google Maps API loading since we know we'll soon need it
 		this.getGoogleMaps();
@@ -112,6 +124,7 @@ class GoogleMap extends Component {
 				maxWidth: 300
 			});
 			const openInfoWindow = this.openInfoWindow.bind(this);
+			const closeListPanel = this.closeListPanel.bind(this);
 
 			this.props.breweries.forEach((brewery) => {
 				const marker = new google.maps.Marker({
@@ -125,6 +138,7 @@ class GoogleMap extends Component {
 
 				marker.addListener('click', function() {
 					openInfoWindow(marker, infoWindow);
+					closeListPanel();
 				});
 
 				this.state.markers.push(marker);
