@@ -114,17 +114,9 @@ h1 {
 /* List Panel */
 
 .list-panel {
-	height: calc(100% - 75px);
-	position: absolute;
-	left: -120px;
-	top: 75px;
-	display: flex;
-	flex-wrap: nowrap;
-	align-items: flex-start;
 	color: #FDBB30;
 	font-size: 1em;
 	text-align: left;
-	transition-duration: 1s;
 }
 
 .open {
@@ -133,11 +125,15 @@ h1 {
 }
 
 .full-list {
-	height: 100%;
+	height: calc(100% - 75px);
+	width: 120px;
+	padding: 20px;
+	position: absolute;
+	left: -120px;
+	top: 75px;
 	overflow: scroll;
 	background-color: #002D62;
-	padding: 20px;
-	width: 120px;
+	transition-duration: 1s;
 }
 
 .full-list ul {
@@ -153,15 +149,18 @@ h1 {
 }
 
 .view-more {
-	background-color: #002D62;
-	border-radius: 0 4px 4px 0;
+	width: 60px;
+	padding: 10px;
+	position: absolute;
+	left: 0;
+	top: 85px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	padding: 10px;
-	margin-top: 10px;
-	width: 60px;
+	border-radius: 0 4px 4px 0;
+	background-color: #002D62;
+	transition-duration: 1s;
 }
 
 .view-more:hover {
@@ -182,4 +181,28 @@ h1 {
 
 .close:before {
 	content: "Close";
+}
+
+@media (min-width: 768px) {
+
+	.full-list {
+		width: 200px;
+		left: -200px;
+	}
+
+	.open {
+		transform: translateX(200px);
+	}
+}
+
+@media (min-width: 1024px) {
+
+	.full-list {
+		width: 300px;
+		left: -300px;
+	}
+
+	.open {
+		transform: translateX(300px);
+	}
 }

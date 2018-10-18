@@ -3,8 +3,10 @@ import './App.css'
 
 class ListPanel extends Component {
 	togglePanelView() {
-		const listPanel = document.querySelector('.list-panel');
-		listPanel.classList.toggle('open');
+		const fullList = document.querySelector('.full-list');
+		const viewMore = document.querySelector('.view-more');
+		fullList.classList.toggle('open');
+		viewMore.classList.toggle('open');
 
 		const wording = document.querySelector('.wording');
 		wording.classList.toggle('view');

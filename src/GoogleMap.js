@@ -95,10 +95,12 @@ class GoogleMap extends Component {
 	}
 
 	closeListPanel() {
-		const listPanel = document.querySelector('.list-panel');
+		const fullList = document.querySelector('.full-list');
+		const viewMore = document.querySelector('.view-more');
 
-		if(window.innerWidth <= 480 && listPanel.classList.contains('open')) {
-			listPanel.classList.remove('open');
+		if(window.innerWidth < 768 && fullList.classList.contains('open')) {
+			fullList.classList.remove('open');
+			viewMore.classList.remove('open');
 
 			const wording = document.querySelector('.wording');
 			wording.classList.toggle('view');
