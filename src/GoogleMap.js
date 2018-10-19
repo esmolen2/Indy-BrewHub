@@ -6,8 +6,7 @@ import * as FoursquareAPI from './FoursquareAPI.js'
 
 class GoogleMap extends Component {
 	state = {
-		map: {},
-		markers: []
+		map: {}
 	}
 
 	// Promise-based approach to calling Google Maps API based on StackOverflow post linked below
@@ -42,7 +41,7 @@ class GoogleMap extends Component {
 	mapMarkers() {
 		const bounds = new google.maps.LatLngBounds();
 
-		this.state.markers.forEach((marker) => {
+		this.props.markers.forEach((marker) => {
 			marker.setMap(this.state.map)
 			bounds.extend(marker.position);
 		})
@@ -116,6 +115,8 @@ class GoogleMap extends Component {
   	componentDidMount() {
     	// Once the Google Maps API has finished loading, initialize the map
 		this.getGoogleMaps().then((google) => {
+			this.props.setGoogle(google);
+
 			const indy = {lat: 39.768563, lng: -86.158018};
 			const map = new google.maps.Map(document.getElementById('map'), {
 				zoom: 14,
@@ -143,7 +144,7 @@ class GoogleMap extends Component {
 					closeListPanel();
 				});
 
-				this.state.markers.push(marker);
+				this.props.markers.push(marker);
 			});
 
 			this.setState({map});

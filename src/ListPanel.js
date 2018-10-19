@@ -13,6 +13,15 @@ class ListPanel extends Component {
 		wording.classList.toggle('close');
 	}
 
+	highlightMarker(event) {
+		const google = this.props.google;
+		this.props.markers.forEach((marker) => {
+			if(marker.id === event.target.id) {
+				marker.setAnimation(google.maps.Animation.BOUNCE);
+				setTimeout(function(){ marker.setAnimation(null); }, 1000);
+			}
+		});
+	}
 
 	render() {
 		return (
@@ -20,7 +29,7 @@ class ListPanel extends Component {
 				<div className="full-list">
 					<ul>
 						{this.props.breweries.map((brewery) => (
-							<li key={brewery.id}>
+							<li key={brewery.id} id={brewery.id} onClick={this.highlightMarker.bind(this)}>
 								{brewery.name}
 							</li>
 						))}

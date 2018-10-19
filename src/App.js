@@ -7,7 +7,9 @@ import * as FoursquareAPI from './FoursquareAPI.js'
 
 class App extends Component {
 	state = {
-		allBrews: []
+		allBrews: [],
+		markers: [],
+		google: {}
 	}
 
 	componentDidMount() {
@@ -17,15 +19,23 @@ class App extends Component {
 		})
 	}
 
+	setGoogle(google) {
+		this.setState({google})
+	}
+
 	render() {
 		return (
 			<div className="App">
 				<HeaderBar />
 				<GoogleMap
 					breweries = {this.state.allBrews}
+					markers = {this.state.markers}
+					setGoogle = {this.setGoogle.bind(this)}
 				/>
 				<ListPanel
 					breweries = {this.state.allBrews}
+					markers = {this.state.markers}
+					google = {this.state.google}
 				/>
 			</div>
 		);
