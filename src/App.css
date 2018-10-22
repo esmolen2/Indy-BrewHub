@@ -136,6 +136,28 @@ h1 {
 	transition-duration: 1s;
 }
 
+.filter {
+	padding: 0 20px 20px;
+}
+
+.filter h2 {
+	margin: 0 0 10px 0;
+	padding: 0;
+	font-size: 1.4em;
+}
+
+.filter input {
+	width: 100%;
+	color: #002D62;
+	font: inherit;
+	border: none;
+	appearance: none;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+}
+
 .full-list ul {
 	margin: 0;
 	padding: 0;

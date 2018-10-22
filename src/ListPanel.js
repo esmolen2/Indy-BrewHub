@@ -29,6 +29,10 @@ class ListPanel extends Component {
 		return (
 			<div className="list-panel">
 				<div className="full-list">
+					<div className="filter">
+						<h2>Filter</h2>
+						<input type="text" placeholder="Search Name"></input>
+					</div>
 					<ul>
 						{this.props.breweries.map((brewery) => (
 							<li key={brewery.id} id={brewery.id} onClick={this.highlightMarker.bind(this)}>
