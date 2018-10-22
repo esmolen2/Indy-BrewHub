@@ -17,6 +17,7 @@ class App extends Component {
 	componentDidMount() {
 		FoursquareAPI.getBreweries().then((allBrews) => {
 				this.setState({allBrews})
+				console.log(allBrews);
 		})
 	}
 
