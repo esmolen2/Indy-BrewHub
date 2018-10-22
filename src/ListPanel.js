@@ -15,8 +15,10 @@ class ListPanel extends Component {
 
 	highlightMarker(event) {
 		const google = this.props.google;
-		this.props.markers.forEach((marker) => {
+		const openInfoWindow = this.props.openInfoWindow.bind(this);
+		this.props.markers.some((marker) => {
 			if(marker.id === event.target.id) {
+				openInfoWindow(marker);
 				marker.setAnimation(google.maps.Animation.BOUNCE);
 				setTimeout(function(){ marker.setAnimation(null); }, 1000);
 			}

@@ -2,12 +2,8 @@
 
 import React, { Component } from 'react'
 import './App.css'
-import * as FoursquareAPI from './FoursquareAPI.js'
 
 class GoogleMap extends Component {
-	state = {
-		map: {}
-	}
 
 	// Promise-based approach to calling Google Maps API based on StackOverflow post linked below
 	// https://stackoverflow.com/questions/48493960/using-google-map-in-react-component
@@ -42,55 +38,11 @@ class GoogleMap extends Component {
 		const bounds = new google.maps.LatLngBounds();
 
 		this.props.markers.forEach((marker) => {
-			marker.setMap(this.state.map)
+			marker.setMap(this.props.map)
 			bounds.extend(marker.position);
 		})
 
-		this.state.map.fitBounds(bounds);
-	}
-
-	openInfoWindow(marker, infoWindow) {
-		FoursquareAPI.pourBrew(marker.id).then((brew) => {
-			console.log(brew);
-			infoWindow.marker = marker;
-			infoWindow.maxWidth = 300;
-			const website = brew.url ? `<a href="${brew.url}" target="_blank">Visit Website</a>` : "";
-			infoWindow.setContent(`
-				<div class="infowindow">
-					<h3>${brew.name}</h3>
-					<img src="${brew.bestPhoto.prefix}height200${brew.bestPhoto.suffix}">
-					<div class="details">
-						<div class="rating">
-							<h4>Rating</h4>
-							<p class="rating-number" style="color: #${brew.ratingColor};">${brew.rating}</p>
-						</div>
-						<div class="address-website">
-							<div class="address">
-								<h4>Address</h4>
-								<p>${brew.location.address}</p>
-								<p>${brew.location.formattedAddress[1]}</p>
-							</div>
-							<div class="website">
-								${website}
-							</div>
-						</div>
-					</div>
-					<p class="citation">*All details and images provided by Foursquare</p>
-				</div>
-			`);
-			infoWindow.open(this.state.map, marker);
-		}).catch((res) => {
-			infoWindow.marker = marker;
-			infoWindow.setContent(`
-				<div class="infowindow">
-					<h3>${marker.title}</h3>
-					<p class="error">
-						Sorry, more details on this brewery are not currently available.
-					</p>
-				</div>
-			`);
-			infoWindow.open(this.state.map, marker);
-		})
+		this.props.map.fitBounds(bounds);
 	}
 
 	closeListPanel() {
@@ -126,7 +78,8 @@ class GoogleMap extends Component {
 			const infoWindow = new google.maps.InfoWindow({
 				maxWidth: 300
 			});
-			const openInfoWindow = this.openInfoWindow.bind(this);
+			this.props.setInfoWindow(infoWindow);
+			const openInfoWindow = this.props.openInfoWindow.bind(this);
 			const closeListPanel = this.closeListPanel.bind(this);
 
 			this.props.breweries.forEach((brewery) => {
@@ -140,14 +93,14 @@ class GoogleMap extends Component {
 				});
 
 				marker.addListener('click', function() {
-					openInfoWindow(marker, infoWindow);
+					openInfoWindow(marker);
 					closeListPanel();
 				});
 
 				this.props.markers.push(marker);
 			});
 
-			this.setState({map});
+			this.props.setMap(map);
 
 			this.mapMarkers();
 		});
