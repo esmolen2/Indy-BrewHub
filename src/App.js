@@ -17,7 +17,6 @@ class App extends Component {
 	componentDidMount() {
 		FoursquareAPI.getBreweries().then((allBrews) => {
 				this.setState({allBrews})
-				console.log(allBrews);
 		})
 	}
 
@@ -25,7 +24,7 @@ class App extends Component {
 		this.setState({google})
 	}
 
-	setMap(map) {
+	setMapState(map) {
 		this.setState({map})
 	}
 
@@ -83,7 +82,7 @@ class App extends Component {
 					markers = {this.state.markers}
 					setGoogle = {this.setGoogle.bind(this)}
 					map = {this.state.map}
-					setMap = {this.setMap.bind(this)}
+					setMapState = {this.setMapState.bind(this)}
 					infoWindow = {this.state.infoWindow}
 					setInfoWindow = {this.setInfoWindow.bind(this)}
 					openInfoWindow = {this.openInfoWindow.bind(this)}
@@ -92,6 +91,7 @@ class App extends Component {
 					breweries = {this.state.allBrews}
 					markers = {this.state.markers}
 					google = {this.state.google}
+					map = {this.state.map}
 					openInfoWindow = {this.openInfoWindow.bind(this)}
 				/>
 			</div>

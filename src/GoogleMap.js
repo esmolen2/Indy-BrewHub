@@ -100,7 +100,7 @@ class GoogleMap extends Component {
 				this.props.markers.push(marker);
 			});
 
-			this.props.setMap(map);
+			this.props.setMapState(map);
 
 			this.mapMarkers();
 		});
