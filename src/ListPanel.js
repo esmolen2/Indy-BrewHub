@@ -35,7 +35,7 @@ class ListPanel extends Component {
 	}
 
 	render() {
-		const {markers, map} = this.props
+		const {markers} = this.props
 		const {query} = this.state
 		let showingBreweries
 		if (query) {
@@ -44,20 +44,17 @@ class ListPanel extends Component {
 			showingBreweries = markers.filter((marker) => match.test(marker.title))
 
 			markers.forEach((marker) => {
-				marker.setMap(map)
-
-				if(!match.test(marker.title)) {
-					marker.setMap(null)
+				marker.setVisible(false);
+				if(match.test(marker.title)) {
+					marker.setVisible(true)
 				}
 			})
-			console.log('query');
 
 		}	else {
 			markers.forEach((marker) => {
-				marker.setMap(map)
+				marker.setVisible(true);
 			})
 			showingBreweries = markers
-			console.log('no query')
 		}
 
 		return (
