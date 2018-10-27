@@ -31,6 +31,7 @@ class ListPanel extends Component {
 	}
 
 	updateQuery(query) {
+		this.props.infoWindow.close();
 		this.setState({query: query.trim()});
 	}
 

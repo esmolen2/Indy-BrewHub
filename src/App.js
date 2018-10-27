@@ -92,6 +92,7 @@ class App extends Component {
 					markers = {this.state.markers}
 					google = {this.state.google}
 					map = {this.state.map}
+					infoWindow = {this.state.infoWindow}
 					openInfoWindow = {this.openInfoWindow.bind(this)}
 				/>
 			</div>
