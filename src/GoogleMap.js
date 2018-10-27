@@ -45,20 +45,6 @@ class GoogleMap extends Component {
 		this.props.map.fitBounds(bounds);
 	}
 
-	closeListPanel() {
-		const fullList = document.querySelector('.full-list');
-		const viewMore = document.querySelector('.view-more');
-
-		if(window.innerWidth < 768 && fullList.classList.contains('open')) {
-			fullList.classList.remove('open');
-			viewMore.classList.remove('open');
-
-			const wording = document.querySelector('.wording');
-			wording.classList.toggle('view');
-			wording.classList.toggle('close');
-		}
-	}
-
 	componentWillMount() {
 		// Start Google Maps API loading since we know we'll soon need it
 		this.getGoogleMaps();
@@ -80,7 +66,7 @@ class GoogleMap extends Component {
 			});
 			this.props.setInfoWindow(infoWindow);
 			const openInfoWindow = this.props.openInfoWindow.bind(this);
-			const closeListPanel = this.closeListPanel.bind(this);
+			const closeListPanel = this.props.closeListPanel.bind(this);
 
 			this.props.breweries.forEach((brewery) => {
 				const marker = new google.maps.Marker({
@@ -93,8 +79,8 @@ class GoogleMap extends Component {
 				});
 
 				marker.addListener('click', function() {
-					openInfoWindow(marker);
 					closeListPanel();
+					openInfoWindow(marker);
 				});
 
 				this.props.markers.push(marker);

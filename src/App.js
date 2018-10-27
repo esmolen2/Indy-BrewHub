@@ -73,6 +73,20 @@ class App extends Component {
 		})
 	}
 
+	closeListPanel() {
+		const fullList = document.querySelector('.full-list');
+		const viewMore = document.querySelector('.view-more');
+
+		if(window.innerWidth < 768 && fullList.classList.contains('open')) {
+			fullList.classList.remove('open');
+			viewMore.classList.remove('open');
+
+			const wording = document.querySelector('.wording');
+			wording.classList.toggle('view');
+			wording.classList.toggle('close');
+		}
+	}
+
 	render() {
 		return (
 			<div className="App">
@@ -86,6 +100,7 @@ class App extends Component {
 					infoWindow = {this.state.infoWindow}
 					setInfoWindow = {this.setInfoWindow.bind(this)}
 					openInfoWindow = {this.openInfoWindow.bind(this)}
+					closeListPanel = {this.closeListPanel}
 				/>
 				<ListPanel
 					breweries = {this.state.allBrews}
@@ -94,6 +109,7 @@ class App extends Component {
 					map = {this.state.map}
 					infoWindow = {this.state.infoWindow}
 					openInfoWindow = {this.openInfoWindow.bind(this)}
+					closeListPanel = {this.closeListPanel}
 				/>
 			</div>
 		);
