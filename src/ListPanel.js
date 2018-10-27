@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import escapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
 
 class ListPanel extends Component {
 	state = {
@@ -57,6 +58,8 @@ class ListPanel extends Component {
 			})
 			showingBreweries = markers
 		}
+
+		showingBreweries.sort(sortBy('title'))
 
 		return (
 			<div className="list-panel">
