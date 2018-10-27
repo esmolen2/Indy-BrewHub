@@ -34,11 +34,13 @@ class App extends Component {
 
 	openInfoWindow(marker) {
 		FoursquareAPI.pourBrew(marker.id).then((brew) => {
+			console.log(brew);
 			this.setState({...this.state.infoWindow, [marker]: marker});
+			// Foursquare's Best Photo does not include any descriptors useful for alt text
 			this.state.infoWindow.setContent(`
 				<div class="infowindow">
 					<h3>${brew.name}</h3>
-					<img src="${brew.bestPhoto.prefix}height200${brew.bestPhoto.suffix}">
+					<img src="${brew.bestPhoto.prefix}height200${brew.bestPhoto.suffix}" alt="${brew.name}'s Best Photo from Foursquare">
 					<div class="details">
 						<div class="rating">
 							<h4>Rating</h4>
