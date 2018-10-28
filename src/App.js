@@ -76,6 +76,10 @@ class App extends Component {
 				</div>
 			`);
 			this.state.infoWindow.open(this.state.map, marker);
+			setTimeout(function() {
+				const header = document.querySelector('.infowindow-header');
+				header.focus();
+			}, 0)
 		})
 	}
 
