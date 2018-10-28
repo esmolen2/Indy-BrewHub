@@ -16,7 +16,9 @@ class App extends Component {
 
 	componentDidMount() {
 		FoursquareAPI.getBreweries().then((allBrews) => {
-				this.setState({allBrews})
+			this.setState({allBrews})
+		}).catch((e) => {
+			alert('Uh oh! There currently seems to be a problem retrieving breweries from this area. Please try again later.')
 		})
 	}
 

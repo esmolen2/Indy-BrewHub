@@ -68,28 +68,33 @@ class GoogleMap extends Component {
 			const openInfoWindow = this.props.openInfoWindow.bind(this);
 			const closeListPanel = this.props.closeListPanel.bind(this);
 
-			this.props.breweries.forEach((brewery) => {
-				const marker = new google.maps.Marker({
-					position: {
-						lat: brewery.location.lat,
-						lng: brewery.location.lng
-					},
-					id: brewery.id,
-					title: brewery.name,
-					alt: brewery.name
+			if(this.props.breweries.length !== 0) {
+				this.props.breweries.forEach((brewery) => {
+					const marker = new google.maps.Marker({
+						position: {
+							lat: brewery.location.lat,
+							lng: brewery.location.lng
+						},
+						id: brewery.id,
+						title: brewery.name,
+						alt: brewery.name
+					});
+
+					marker.addListener('click', function() {
+						closeListPanel();
+						openInfoWindow(marker);
+					});
+
+					this.props.markers.push(marker);
 				});
 
-				marker.addListener('click', function() {
-					closeListPanel();
-					openInfoWindow(marker);
-				});
+				this.props.setMapState(map);
 
-				this.props.markers.push(marker);
-			});
-
-			this.props.setMapState(map);
-
-			this.mapMarkers();
+				this.mapMarkers();
+			}
+		})
+		.catch((e) => {
+			alert('Uh oh! Google Maps seems to be having some issues at the moment. Please try again later.')
 		});
   	}
 
