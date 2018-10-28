@@ -63,6 +63,7 @@ class App extends Component {
 			`);
 			this.state.infoWindow.open(this.state.map, marker);
 
+			// Set focus in infowindow after opening said infowindow
 			setTimeout(function() {
 				const header = document.querySelector('.infowindow-header');
 				header.focus();
@@ -78,6 +79,8 @@ class App extends Component {
 				</div>
 			`);
 			this.state.infoWindow.open(this.state.map, marker);
+
+			// Set focus in infowindow after opening said infowindow
 			setTimeout(function() {
 				const header = document.querySelector('.infowindow-header');
 				header.focus();
@@ -89,10 +92,12 @@ class App extends Component {
 		const fullList = document.querySelector('.full-list');
 		const viewMore = document.querySelector('.view-more');
 
+		// Close the list panel when an infowindow opens only when the screen is too small to fit both panel and window comfortably
 		if(window.innerWidth < 768 && fullList.classList.contains('open')) {
 			fullList.classList.remove('open');
 			viewMore.classList.remove('open');
 
+			// Change the wording of the button to open/close panel accordingly, i.e. "View List" when panel closed vs. "Close List" when panel opened
 			const wording = document.querySelector('.wording');
 			wording.classList.toggle('view');
 			wording.classList.toggle('close');
@@ -109,16 +114,13 @@ class App extends Component {
 					setGoogle = {this.setGoogle.bind(this)}
 					map = {this.state.map}
 					setMapState = {this.setMapState.bind(this)}
-					infoWindow = {this.state.infoWindow}
 					setInfoWindow = {this.setInfoWindow.bind(this)}
 					openInfoWindow = {this.openInfoWindow.bind(this)}
 					closeListPanel = {this.closeListPanel}
 				/>
 				<ListPanel
-					breweries = {this.state.allBrews}
 					markers = {this.state.markers}
 					google = {this.state.google}
-					map = {this.state.map}
 					infoWindow = {this.state.infoWindow}
 					openInfoWindow = {this.openInfoWindow.bind(this)}
 					closeListPanel = {this.closeListPanel}

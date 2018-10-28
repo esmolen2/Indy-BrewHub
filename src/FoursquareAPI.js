@@ -7,11 +7,13 @@ const resultsLimit = 20;
 const breweryCategory = '50327c8591d4c4b30a586d5d';
 const foursquareVersion = '20180926';
 
+// Retreive all breweries that will be mapped and listed in the application
 export const getBreweries = () =>
 	fetch(`${api}/search?client_id=${clientID}&client_secret=${clientSecret}&v=${foursquareVersion}&ll=${searchLatLng}&intent=browse&radius=${searchRadius}&limit=${resultsLimit}&categoryId=${breweryCategory}`)
 		.then(res => res.json())
 		.then(res => res.response.venues)
 
+// Retrieve more details about a specific brewery
 export const pourBrew = (id) =>
 	fetch(`${api}/${id}?client_id=${clientID}&client_secret=${clientSecret}&v=${foursquareVersion}`)
 		.then(res => res.json())

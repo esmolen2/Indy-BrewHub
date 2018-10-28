@@ -11,9 +11,12 @@ class ListPanel extends Component {
 	togglePanelView() {
 		const fullList = document.querySelector('.full-list');
 		const viewMore = document.querySelector('.view-more');
+
+		// Open and close the side panel containing the list of breweries
 		fullList.classList.toggle('open');
 		viewMore.classList.toggle('open');
 
+		// Accessibility notification of when side panel is open or closed
 		let expanded = viewMore.getAttribute('aria-expanded');
 		if(expanded === 'true') {
 			viewMore.setAttribute('aria-expanded', 'false');
@@ -21,10 +24,12 @@ class ListPanel extends Component {
 			viewMore.setAttribute('aria-expanded', 'true');
 		}
 
+		// Change the wording of the button to open/close panel accordingly, i.e. "View List" when panel closed vs. "Close List" when panel opened
 		const wording = document.querySelector('.wording');
 		wording.classList.toggle('view');
 		wording.classList.toggle('close');
 
+		// If the side list panel is closed, remove the search input and list buttons from the page's tab order. If the side list panel is open, add the search input and list buttons to the page's tab order.
 		const brewList = document.getElementById('brewery-list').childNodes;
 		const brewerySearch = document.querySelector('.brewery-search');
 		if(viewMore.classList.contains('open')) {
@@ -44,6 +49,8 @@ class ListPanel extends Component {
 		const google = this.props.google;
 		const openInfoWindow = this.props.openInfoWindow.bind(this);
 		const closeListPanel = this.props.closeListPanel.bind(this);
+
+		// Cycle through the array of map markers for the match of the brewery clicked in the list, open its infowindow and make the marker bounce twice on the map. Close the side list panel if the screen is small.
 		this.props.markers.forEach((marker) => {
 			if(marker.id === event.target.id) {
 				closeListPanel();
@@ -55,19 +62,22 @@ class ListPanel extends Component {
 	}
 
 	updateQuery(query) {
-		this.props.infoWindow.close();
+		this.props.infoWindow.close(); // If an infowindow is open, close it when typing out a search
 		this.setState({query: query.trim()});
 	}
 
 	render() {
 		const {markers} = this.props
 		const {query} = this.state
+
+		// If there is a search being performed, look for breweries that match the search, otherwise use the full list of breweries
 		let showingBreweries
 		if (query) {
 			const match = new RegExp(escapeRegExp(query), 'i')
 
 			showingBreweries = markers.filter((marker) => match.test(marker.title))
 
+			// Hide map markers of breweries that don't fit the search criteria
 			markers.forEach((marker) => {
 				marker.setVisible(false);
 				if(match.test(marker.title)) {
@@ -76,12 +86,14 @@ class ListPanel extends Component {
 			})
 
 		}	else {
+			// If no search is being made, show all breweries in the list and markers on the map
 			markers.forEach((marker) => {
 				marker.setVisible(true);
 			})
 			showingBreweries = markers
 		}
 
+		// Remove the list buttons from the page's tab order if the side list panel is closed. Add to the page's tab order if the panel is open
 		if (document.querySelector('.view-more')) {
 			if (document.querySelector('.view-more').classList.contains('open')) {
 				showingBreweries.forEach((brewery) => {
@@ -94,6 +106,7 @@ class ListPanel extends Component {
 			}
 		}
 
+		// Sort brewery list alphabetically by brewery name
 		showingBreweries.sort(sortBy('title'))
 
 		return (

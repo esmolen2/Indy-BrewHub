@@ -53,23 +53,31 @@ class GoogleMap extends Component {
   	componentDidMount() {
     	// Once the Google Maps API has finished loading, initialize the map
 		this.getGoogleMaps().then((google) => {
+			// Allow google variable to be used within other components
 			this.props.setGoogle(google);
 
+			// Initialize the map itself and its location
 			const indy = {lat: 39.768563, lng: -86.158018};
 			const map = new google.maps.Map(document.getElementById('map'), {
 				zoom: 14,
 				center: indy
 			});
 
+			// Create an infowindow that can be referenced within other components
 			const infoWindow = new google.maps.InfoWindow({
 				maxWidth: 300
 			});
 			this.props.setInfoWindow(infoWindow);
+
+			// Prepare props to be called within other scopes
 			const openInfoWindow = this.props.openInfoWindow.bind(this);
 			const closeListPanel = this.props.closeListPanel.bind(this);
 
+			// Initialize map markers baed on locations in brewery list
 			if(this.props.breweries.length !== 0) {
 				this.props.breweries.forEach((brewery) => {
+
+					// Create the marker
 					const marker = new google.maps.Marker({
 						position: {
 							lat: brewery.location.lat,
@@ -80,16 +88,20 @@ class GoogleMap extends Component {
 						alt: brewery.name
 					});
 
+					// Open an infowindow on click of marker and close the list panel if on smaller screen
 					marker.addListener('click', function() {
 						closeListPanel();
 						openInfoWindow(marker);
 					});
 
+					// Allow the marker to be referenced within other components
 					this.props.markers.push(marker);
 				});
 
+				// Allow the map to be referenced within other components
 				this.props.setMapState(map);
 
+				// Place the markers on the map
 				this.mapMarkers();
 			}
 		})

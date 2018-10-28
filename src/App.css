@@ -1,3 +1,5 @@
+/* General Set up */
+
 html {
 	box-sizing: border-box;
 }
@@ -22,6 +24,7 @@ body {
   height: 100%;
 }
 
+/* App Header */
 .header-bar {
 	background-color: #002D62;
 	color: #FDBB30;
@@ -45,6 +48,7 @@ h1 {
 	font-size: 2em;
 }
 
+/* Map & Map Elements */
 #map {
 	height: calc(100% - 75px);
 	width: 100%;
