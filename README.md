@@ -9,7 +9,7 @@ This is a single page application that uses Google Maps and venue data from Four
 ## How to Run
 
 ### Run in Developer Mode
-1. Download or clone this repository
+1. [Download](https://github.com/esmolen2/Indy-BrewHub/archive/master.zip) or [clone](https://github.com/esmolen2/Indy-BrewHub.git) this repository
 2. Run ```npm install``` in the working directory
 3. Install all dependancies (See Dependancies section below).
 4. Run ```npm start``` to initialize the application.
@@ -19,7 +19,7 @@ Please note that the service worker for this application will not register in de
 
 ### Run in Production Mode
 If you wish to cache the application via service worker, run the application in production mode via the steps below
-1. Download or clone this repository
+1. [Download](https://github.com/esmolen2/Indy-BrewHub/archive/master.zip) or [clone](https://github.com/esmolen2/Indy-BrewHub.git) this repository
 2. Run ```npm install``` in the working directory
 3. Install all dependancies (See Dependancies section below)
 4. Run ```npm run build``` to build a production version of the application.
@@ -35,7 +35,7 @@ To install these dependancies, navigate to the working directory and run ```npm 
 
 ## Resources
 * General: Udacity Front End Web Developer Nanodegree program lessons, projects, mentors, and forums!
-* Map: [Google Maps API] (https://cloud.google.com/maps-platform/)
-* Map initialization: [Stack Overflow user Tremby] (https://stackoverflow.com/questions/48493960/using-google-map-in-react-component)
-* Brewery Data: [Foursquare] (https://foursquare.com/)
+* Map: [Google Maps API](https://cloud.google.com/maps-platform/)
+* Map initialization: [Stack Overflow user Tremby](https://stackoverflow.com/questions/48493960/using-google-map-in-react-component)
+* Brewery Data: [Foursquare](https://foursquare.com/)
 * React: This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
