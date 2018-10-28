@@ -75,7 +75,8 @@ class GoogleMap extends Component {
 						lng: brewery.location.lng
 					},
 					id: brewery.id,
-					title: brewery.name
+					title: brewery.name,
+					alt: brewery.name
 				});
 
 				marker.addListener('click', function() {
@@ -94,7 +95,7 @@ class GoogleMap extends Component {
 
   	render() {
     	return (
-			<div id="map"></div>
+			<div id="map" role="application" aria-label="Breweries Map"></div>
     	)
   	}
 }

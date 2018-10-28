@@ -179,6 +179,11 @@ h1 {
 	width: 60px;
 	padding: 10px;
 	position: absolute;
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+	text-align: inherit;
+	border: none;
 	left: 0;
 	top: 85px;
 	display: flex;

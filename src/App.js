@@ -34,12 +34,11 @@ class App extends Component {
 
 	openInfoWindow(marker) {
 		FoursquareAPI.pourBrew(marker.id).then((brew) => {
-			console.log(brew);
 			this.setState({...this.state.infoWindow, [marker]: marker});
 			// Foursquare's Best Photo does not include any descriptors useful for alt text
 			this.state.infoWindow.setContent(`
 				<div class="infowindow">
-					<h3>${brew.name}</h3>
+					<h3 class="infowindow-header" tabIndex="-1">${brew.name}</h3>
 					<img src="${brew.bestPhoto.prefix}height200${brew.bestPhoto.suffix}" alt="${brew.name}'s Best Photo from Foursquare">
 					<div class="details">
 						<div class="rating">
@@ -61,11 +60,16 @@ class App extends Component {
 				</div>
 			`);
 			this.state.infoWindow.open(this.state.map, marker);
+
+			setTimeout(function() {
+				const header = document.querySelector('.infowindow-header');
+				header.focus();
+			}, 0)
 		}).catch((res) => {
 			this.setState({...this.state.infoWindow, [marker]: marker});
 			this.state.infoWindow.setContent(`
 				<div class="infowindow">
-					<h3>${marker.title}</h3>
+					<h3 class="infowindow-header" tabIndex="-1">${marker.title}</h3>
 					<p class="error">
 						Sorry, more details on this brewery are not currently available.
 					</p>
